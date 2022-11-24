@@ -1,6 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CategoriesModule } from './modules/categories/categories.module';
+import { DatesModule } from './modules/dates/dates.module';
+import { EventsModule } from './modules/events/events.module';
+import { VenuesModule } from './modules/venues/venues.module';
+import { UsersModule } from './modules/users/users.module';
+import { ListingsModule } from './modules/listings/listings.module';
+import { SalesModule } from './modules/sales/sales.module';
 
 @Module({
   imports: [
@@ -15,6 +22,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true
     }),
+    CategoriesModule,
+    DatesModule,
+    EventsModule,
+    VenuesModule,
+    UsersModule,
+    ListingsModule,
+    SalesModule,
   ],
 })
 export class AppModule {}
