@@ -5,9 +5,12 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { DatesModule } from './modules/dates/dates.module';
 import { EventsModule } from './modules/events/events.module';
 import { VenuesModule } from './modules/venues/venues.module';
-import { UsersModule } from './modules/users/users.module';
+// import { UsersModule } from './modules/users/users.module';
 import { ListingsModule } from './modules/listings/listings.module';
 import { SalesModule } from './modules/sales/sales.module';
+import { CommonModule } from './common/common.module';
+import { SeedModule } from './seed/seed.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -22,13 +25,16 @@ import { SalesModule } from './modules/sales/sales.module';
       autoLoadEntities: true,
       synchronize: true
     }),
+    CommonModule,
+    SeedModule,
     CategoriesModule,
     DatesModule,
     EventsModule,
     VenuesModule,
-    UsersModule,
+    // UsersModule,
     ListingsModule,
     SalesModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

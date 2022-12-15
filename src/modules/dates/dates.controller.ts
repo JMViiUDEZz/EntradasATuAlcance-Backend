@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseUUIDPipe } from '@nestjs/common';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { DatesService } from './dates.service';
 import { CreateDateDto } from './dto/create-date.dto';
 import { UpdateDateDto } from './dto/update-date.dto';
@@ -13,22 +14,22 @@ export class DatesController {
   }
 
   @Get()
-  findAll() {
-    return this.datesService.findAll();
+  findAll( @Query() paginationDto:PaginationDto ) {
+    return this.datesService.findAll( paginationDto );
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.datesService.findOne(+id);
+  @Get(':dateid')
+  findOne(@Param('dateid') dateid: string) {
+    return this.datesService.findOnePlain(dateid);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDateDto: UpdateDateDto) {
-    return this.datesService.update(+id, updateDateDto);
+  @Patch(':dateid')
+  update(@Param('dateid', ParseUUIDPipe ) dateid: string, @Body() updateDateDto: UpdateDateDto) {
+    return this.datesService.update(dateid, updateDateDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.datesService.remove(+id);
+  @Delete(':dateid')
+  remove(@Param('dateid', ParseUUIDPipe ) dateid: string) {
+    return this.datesService.remove(dateid);
   }
 }

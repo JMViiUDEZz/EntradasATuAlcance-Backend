@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseUUIDPipe } from '@nestjs/common';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -13,22 +14,22 @@ export class EventsController {
   }
 
   @Get()
-  findAll() {
-    return this.eventsService.findAll();
+  findAll( @Query() paginationDto:PaginationDto ) {
+    return this.eventsService.findAll( paginationDto );
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.eventsService.findOne(+id);
+  @Get(':term')
+  findOne(@Param('term') term: string) {
+    return this.eventsService.findOnePlain(term);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
-    return this.eventsService.update(+id, updateEventDto);
+  @Patch(':eventid')
+  update(@Param('eventid', ParseUUIDPipe ) eventid: string, @Body() updateEventDto: UpdateEventDto) {
+    return this.eventsService.update(eventid, updateEventDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.eventsService.remove(+id);
+  @Delete(':eventid')
+  remove(@Param('eventid', ParseUUIDPipe ) eventid: string) {
+    return this.eventsService.remove(eventid);
   }
 }

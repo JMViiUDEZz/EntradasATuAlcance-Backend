@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseUUIDPipe } from '@nestjs/common';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { VenuesService } from './venues.service';
 import { CreateVenueDto } from './dto/create-venue.dto';
 import { UpdateVenueDto } from './dto/update-venue.dto';
@@ -13,22 +14,22 @@ export class VenuesController {
   }
 
   @Get()
-  findAll() {
-    return this.venuesService.findAll();
+  findAll( @Query() paginationDto:PaginationDto ) {
+    return this.venuesService.findAll( paginationDto );
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.venuesService.findOne(+id);
+  @Get(':term')
+  findOne(@Param('term') term: string) {
+    return this.venuesService.findOne(term);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVenueDto: UpdateVenueDto) {
-    return this.venuesService.update(+id, updateVenueDto);
+  @Patch(':venueid')
+  update(@Param('venueid', ParseUUIDPipe ) venueid: string, @Body() updateVenueDto: UpdateVenueDto) {
+    return this.venuesService.update(venueid, updateVenueDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.venuesService.remove(+id);
+  @Delete(':venueid')
+  remove(@Param('venueid', ParseUUIDPipe ) venueid: string) {
+    return this.venuesService.remove(venueid);
   }
 }

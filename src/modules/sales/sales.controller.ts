@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseUUIDPipe } from '@nestjs/common';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { SalesService } from './sales.service';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
@@ -13,22 +14,22 @@ export class SalesController {
   }
 
   @Get()
-  findAll() {
-    return this.salesService.findAll();
+  findAll( @Query() paginationDto:PaginationDto ) {
+    return this.salesService.findAll( paginationDto );
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.salesService.findOne(+id);
+  @Get(':saleid')
+  findOne(@Param('saleid') saleid: string) {
+    return this.salesService.findOnePlain(saleid);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSaleDto: UpdateSaleDto) {
-    return this.salesService.update(+id, updateSaleDto);
+  @Patch(':saleid')
+  update(@Param('saleid', ParseUUIDPipe ) saleid: string, @Body() updateSaleDto: UpdateSaleDto) {
+    return this.salesService.update(saleid, updateSaleDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.salesService.remove(+id);
+  @Delete(':saleid')
+  remove(@Param('saleid', ParseUUIDPipe ) saleid: string) {
+    return this.salesService.remove(saleid);
   }
 }
