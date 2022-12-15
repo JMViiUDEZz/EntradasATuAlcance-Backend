@@ -13,7 +13,6 @@ export class Listing {
         () => User,
         (User) => User.list,
         { cascade: true, eager: true  }
-        // { cascade: true, eager: true  }
     )
     seller: User;
      
@@ -21,7 +20,6 @@ export class Listing {
         () => Event,
         (Event) => Event.list,
         { cascade: true, eager: true  }
-        // { cascade: true, eager: true  }
     )
     @JoinColumn()
     event: Event;
@@ -30,21 +28,20 @@ export class Listing {
         () => Date,
         (Date) => Date.list,
         { cascade: true, eager: true  }
-        // { cascade: true, eager: true  }
     )
     date: Date;
     
-    @Column('integer',{ //int
+    @Column('integer',{ 
         default: 0
     })
     numtickets: number;   
 
-    @Column('integer',{ //int
+    @Column('integer',{
         default: 0
     })
     priceperticket: number;   
 
-    @Column('integer',{ //int
+    @Column('integer',{
         default: 0
     })
     totalprice: number;   
@@ -56,7 +53,6 @@ export class Listing {
         () => Sale,
         (Sale) => Sale.list,
         {  onDelete: 'CASCADE' } 
-        // { cascade: true, eager: true  }
     )
     sale: Sale;
 }

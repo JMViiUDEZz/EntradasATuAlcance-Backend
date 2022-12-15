@@ -32,35 +32,14 @@ export class EventsService {
 
   
   async create(createEventDto: CreateEventDto) {
-    // return 'This action adds a new event';
     try {
-      // ANTES DE RELACION
-      // const event = this.eventRepository.create(createEventDto);
-      // await this.eventRepository.save(event);
-      // return event;
-      
-      // DESPUES DE RELACION MIA
-      // const venueid = createVenueDto.venueid;
       const { venue, cat, date, ...campos } = createEventDto;
-      // console.log({ ...campos });
-      // const venue = this.venueService.findOne( venueid );
-      // const cat = this.categoryService.findOne( catid );
-      // const date = this.dateService.findOne( dateid );
       const event = this.eventRepository.create({ ...campos });
       event.venue = await this.venueService.findOne( venue );
       event.cat = await this.categoryService.findOne( cat );
       event.date = await this.dateService.findOne( date );
       await this.eventRepository.save( event );
       return event;
-
-      // DESPUES DE RELACION CURSO
-      // const { images = [], ...categoryDetails } = createEventDto;
-      // const event = this.eventRepository.create({
-      //   ...categoryDetails,
-      //   images: images.map( image => this.categoryImageRepository.create({ url: image }) )
-      // });
-      // await this.eventRepository.save( event );
-      // return { ...event, images };
     } catch (error) {
       console.log(error);
       throw new InternalServerErrorException('Error en BD!')
@@ -68,8 +47,6 @@ export class EventsService {
   }
 
   async findAll( paginationDto: PaginationDto ) {
-    // return `This action returns all events`;
-    // return this.eventRepository.find({});
     const { limit = 10, offset = 0 } = paginationDto;
     const events = await this.eventRepository.find({
       take: limit,
@@ -77,7 +54,6 @@ export class EventsService {
     })
     return events.map( ( event ) => ({
       ...event,
-      // venueid: event.venueid.map( img => img.url ),
       venue: event.venue.venueid,
       cat: event.cat.catid,
       date: event.date.dateid,
@@ -91,17 +67,15 @@ export class EventsService {
     if ( isUUID(term) ) {
       event = await this.eventRepository.findOneBy({ eventid: term });
     } else {
-      // product = await this.productRepository.findOneBy({ slug: term });
       const queryBuilder = this.eventRepository.createQueryBuilder('eve'); 
       event = await queryBuilder
         .where('eventname =:eventname', {
           eventname: term,
         })
-        .leftJoinAndSelect('eve.venueid', //relacion
-        'eveVenues') //alias
+        .leftJoinAndSelect('eve.venueid',
+        'eveVenues')
         .getOne();
     }
-    // const product = await this.productRepository.findOneBy({ id });
 
     if ( !event ) 
       throw new NotFoundException(`Product with ${ term } not found`);
@@ -120,7 +94,6 @@ export class EventsService {
       venue: venue.venueid,
       cat: cat.catid,
       date: date.dateid,
-      // images: images.map( image => image.url )
     }
   }
 
@@ -146,28 +119,20 @@ export class EventsService {
       if( venue ) {
         event.venue = await this.venueService.findOne( venue );
       } 
-      // else {
-      // }
 
       if( cat ) {
         event.cat = await this.categoryService.findOne( cat );
       } 
-      // else {
-      // }
 
       if( date ) {
         event.date = await this.dateService.findOne( date );
-      } 
-      // else {
-      // }
+      }      
 
-      // await this.productRepository.save( product );
       await queryRunner.manager.save( event );
 
       await queryRunner.commitTransaction();
       await queryRunner.release();
 
-      // return product;
       return this.findOnePlain( eventid );
       
     } catch (error) {
@@ -193,7 +158,6 @@ export class EventsService {
       throw new BadRequestException(error.detail);
     
     this.logger.error(error)
-    // console.log(error)
     throw new InternalServerErrorException('Unexpected error, check server logs');
 
   }
@@ -213,24 +177,3 @@ export class EventsService {
   }
 
 }
-
-//   create(createEventDto: CreateEventDto) {
-//     return 'This action adds a new event';
-//   }
-
-//   findAll() {
-//     return `This action returns all events`;
-//   }
-
-//   findOne(eventid: string) {
-//     return `This action returns a #${eventid} event`;
-//   }
-
-//   update(eventid: string, updateEventDto: UpdateEventDto) {
-//     return `This action updates a #${eventid} event`;
-//   }
-
-//   remove(eventid: string) {
-//     return `This action removes a #${eventid} event`;
-//   }
-// }

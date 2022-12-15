@@ -14,7 +14,6 @@ export class Event {
         () => Venue,
         (Venue) => Venue.event,
         { cascade: true, eager: true  }
-        // { cascade: true, eager: true  }
     )
     venue: Venue;
      
@@ -22,7 +21,6 @@ export class Event {
         () => Category,
         (Category) => Category.event,
         { cascade: true, eager: true  }
-        // { cascade: true, eager: true  }
     )
     cat: Category;
 
@@ -30,7 +28,6 @@ export class Event {
         () => Date,
         (Date) => Date.event,
         { cascade: true, eager: true  }
-        // { cascade: true, eager: true  }
     )
     date: Date;
 
@@ -44,7 +41,6 @@ export class Event {
         () => Sale,
         (Sale) => Sale.event,
         {  onDelete: 'CASCADE' }   
-        // { cascade: true, eager: true  }
     )
     sale: Sale[];  
 
@@ -52,7 +48,6 @@ export class Event {
         () => Listing,
         (Listing) => Listing.event,
         {  onDelete: 'CASCADE' }
-        // { cascade: true, eager: true  }
     )
     list: Listing;
 }

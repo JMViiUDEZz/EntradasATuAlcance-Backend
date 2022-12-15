@@ -8,7 +8,6 @@ import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 import { Listing } from '../listings/entities/listing.entity';
 
-// import { UsersService } from '../users/users.service';
 import { AuthService } from '../auth/auth.service';
 import { EventsService } from '../events/events.service';
 import { DatesService } from '../dates/dates.service';
@@ -21,7 +20,6 @@ export class ListingsService {
 
     @InjectRepository(Listing)
     private readonly listingRepository: Repository<Listing>,
-    // private readonly authService: UsersService,
     private readonly authService: AuthService,
     private readonly eventService: EventsService,
     private readonly dateService: DatesService,
@@ -31,35 +29,14 @@ export class ListingsService {
 
   
   async create(createListingDto: CreateListingDto) {
-    // return 'This action adds a new listing';
     try {
-      // ANTES DE RELACION
-      // const listing = this.listingRepository.create(createListingDto);
-      // await this.listingRepository.save(listing);
-      // return listing;
-      
-      // DESPUES DE RELACION MIA
-      // const venueid = createVenueDto.venueid;
       const { seller, event, date, ...campos } = createListingDto;
-      // console.log({ ...campos });
-      // const venue = this.venueService.findOne( venueid );
-      // const cat = this.categoryService.findOne( catid );
-      // const date = this.dateService.findOne( dateid );
       const listing = this.listingRepository.create({ ...campos });
       listing.seller = await this.authService.findOne( seller );
       listing.event = await this.eventService.findOne( event );
       listing.date = await this.dateService.findOne( date );
       await this.listingRepository.save( listing );
       return listing;
-
-      // DESPUES DE RELACION CURSO
-      // const { images = [], ...categoryDetails } = createListingDto;
-      // const listing = this.listingRepository.create({
-      //   ...categoryDetails,
-      //   images: images.map( image => this.categoryImageRepository.create({ url: image }) )
-      // });
-      // await this.listingRepository.save( listing );
-      // return { ...listing, images };
     } catch (error) {
       console.log(error);
       throw new InternalServerErrorException('Error en BD!')
@@ -67,8 +44,6 @@ export class ListingsService {
   }
 
   async findAll( paginationDto: PaginationDto ) {
-    // return `This action returns all listings`;
-    // return this.listingRepository.find({});
     const { limit = 10, offset = 0 } = paginationDto;
     const listings = await this.listingRepository.find({
       take: limit,
@@ -76,7 +51,6 @@ export class ListingsService {
     })
     return listings.map( ( listing ) => ({
       ...listing,
-      // images: listing.images.map( img => img.url )
       seller: listing.seller.userid,
       event: listing.event.eventid,
       date: listing.date.dateid,
@@ -88,7 +62,6 @@ export class ListingsService {
     let listing: Listing;
 
     listing = await this.listingRepository.findOneBy({ listid });
-    // const product = await this.productRepository.findOneBy({ id });
 
     if ( !listing ) 
       throw new NotFoundException(`Product with ${ listid } not found`);
@@ -98,7 +71,6 @@ export class ListingsService {
 
   async findOnePlain( listid: string ) {
     const { 
-      // images = [],
       seller,
       event,
       date,
@@ -108,14 +80,12 @@ export class ListingsService {
       seller : seller.userid,
       event : event.eventid,
       date : date.dateid,
-      // images: images.map( image => image.url )
     }
   }
 
   async update( listid: string, updateListingDto: UpdateListingDto ) {
 
     const { 
-      // images, 
       seller,
       event,
       date,
@@ -135,28 +105,21 @@ export class ListingsService {
       if( seller ) {
         listing.seller = await this.authService.findOne( seller );
       } 
-      // else {
-      // }
+
 
       if( event ) {
         listing.event = await this.eventService.findOne( event );
       } 
-      // else {
-      // }
 
       if( date ) {
         listing.date = await this.dateService.findOne( date );
       } 
-      // else {
-      // }
 
-      // await this.productRepository.save( product );
       await queryRunner.manager.save( listing );
 
       await queryRunner.commitTransaction();
       await queryRunner.release();
 
-      // return product;
       return this.findOnePlain( listid );
       
     } catch (error) {
@@ -182,7 +145,6 @@ export class ListingsService {
       throw new BadRequestException(error.detail);
     
     this.logger.error(error)
-    // console.log(error)
     throw new InternalServerErrorException('Unexpected error, check server logs');
 
   }
@@ -202,24 +164,3 @@ export class ListingsService {
   }
 
 }
-
-//   create(createListingDto: CreateListingDto) {
-//     return 'This action adds a new listing';
-//   }
-
-//   findAll() {
-//     return `This action returns all listings`;
-//   }
-
-//   findOne(listid: string) {
-//     return `This action returns a #${listid} listing`;
-//   }
-
-//   update(listid: string, updateListingDto: UpdateListingDto) {
-//     return `This action updates a #${listid} listing`;
-//   }
-
-//   remove(listid: string) {
-//     return `This action removes a #${listid} listing`;
-//   }
-// }

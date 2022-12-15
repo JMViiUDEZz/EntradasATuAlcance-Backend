@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MaxLength, MinLength, Length, IsDate, IsNumber, IsDecimal, IsArray, IsOptional } from "class-validator";
+import { IsString, IsNumber, IsArray, IsOptional } from "class-validator";
 
 export class CreateSaleDto {
     @IsArray()
@@ -21,25 +21,14 @@ export class CreateSaleDto {
     date: string;
 
     @IsNumber()
-    // @IsNotEmpty()
-    // @Length(1)    
     qtysold: number;
 
     @IsNumber()
-    // @IsNotEmpty()
-    // @MinLength(1)    
-    // @MaxLength(4) 
     pricepaid: number;
 
     @IsNumber()
-    // @IsDecimal()
-    // @IsNotEmpty()
-    // @MinLength(1)    
-    // @MaxLength(6) 
     commission: number;
 
     @IsString()
-    // @IsNotEmpty()
-    // @Length(10)  
     saletime: string;
  }

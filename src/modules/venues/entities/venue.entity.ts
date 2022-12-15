@@ -26,7 +26,6 @@ export class Venue {
         () => Event,
         (Event) => Event.venue,
         {  onDelete: 'CASCADE' }
-        // { cascade: false, eager: false  }
     )
     event: Event[];
 }

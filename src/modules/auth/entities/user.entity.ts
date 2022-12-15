@@ -83,13 +83,11 @@ export class User {
         () => Sale,
         (Sale) => Sale.seller,
         {  onDelete: 'CASCADE' }
-        // { cascade: false, eager: false  }
     )
     @OneToMany(
         () => Sale,
         (Sale) => Sale.buyer,
         {  onDelete: 'CASCADE' }
-        // { cascade: false, eager: false  }
     )
     sale: Sale[];
 
@@ -97,7 +95,6 @@ export class User {
         () => Listing,
         (Listing) => Listing.seller,
         {  onDelete: 'CASCADE' }
-        // { cascade: false, eager: false  }
     )
     list: Listing[];
 }

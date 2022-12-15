@@ -5,7 +5,6 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { DatesModule } from './modules/dates/dates.module';
 import { EventsModule } from './modules/events/events.module';
 import { VenuesModule } from './modules/venues/venues.module';
-// import { UsersModule } from './modules/users/users.module';
 import { ListingsModule } from './modules/listings/listings.module';
 import { SalesModule } from './modules/sales/sales.module';
 import { CommonModule } from './common/common.module';
@@ -31,7 +30,6 @@ import { AuthModule } from './modules/auth/auth.module';
     DatesModule,
     EventsModule,
     VenuesModule,
-    // UsersModule,
     ListingsModule,
     SalesModule,
     AuthModule,

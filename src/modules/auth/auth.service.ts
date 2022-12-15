@@ -44,7 +44,6 @@ export class AuthService {
         ...user,
         token: this.getJwtToken({ userid: user.userid })
       };
-      // TODO: Retornar el JWT de acceso
 
     } catch (error) {
       this.handleDBErrors(error);
@@ -53,8 +52,6 @@ export class AuthService {
   }
 
   async findAll( paginationDto: PaginationDto ) {
-    // return `This action returns all users`;
-    // return this.userRepository.find({});
     const { limit = 10, offset = 0 } = paginationDto;
     const users = await this.userRepository.find({
       take: limit,
@@ -62,7 +59,6 @@ export class AuthService {
     })
     return users.map( ( user ) => ({
       ...user,
-      // images: user.images.map( img => img.url )
     }))
   }
 
@@ -73,17 +69,13 @@ export class AuthService {
     if ( isUUID(term) ) {
       user = await this.userRepository.findOneBy({ userid: term });
     } else {
-      // product = await this.productRepository.findOneBy({ slug: term });
       const queryBuilder = this.userRepository.createQueryBuilder('use'); 
       user = await queryBuilder
         .where('username =:username', {
           username: term,
         })
-        // .leftJoinAndSelect('use.images',
-        // 'prodImages')
         .getOne();
     }
-    // const product = await this.productRepository.findOneBy({ id });
 
     if ( !user ) 
       throw new NotFoundException(`Product with ${ term } not found`);
@@ -93,18 +85,15 @@ export class AuthService {
 
   async findOnePlain( term: string ) {
     const { 
-      // images = [],
        ...rest } = await this.findOne( term );
     return {
       ...rest,
-      // images: images.map( image => image.url )
     }
   }
 
   async update( userid: string, updateUserDto: UpdateUserDto ) {
 
     const { 
-      // images, 
       ...toUpdate } = updateUserDto; 
 
     const user = await this.userRepository.preload({
@@ -118,26 +107,12 @@ export class AuthService {
     await queryRunner.startTransaction();
 
     try {
-      // if( images ) {
-        // await queryRunner.manager.delete(
-        //   ProductImage
-        //   , { user: { userid } }
-        //   );
-          // user.images = images.map(
-        //   image => this.productImageRepository.create({ url: image })
-        // )
-      // } 
-      // else {
-      //   product.images = await this.productImageRepository.findBy({ product: { id } })
-      // }
-
-      // await this.productRepository.save( product );
+    
       await queryRunner.manager.save( user );
 
       await queryRunner.commitTransaction();
       await queryRunner.release();
 
-      // return product;
       return this.findOnePlain( userid );
       
     } catch (error) {
@@ -201,7 +176,6 @@ export class AuthService {
       throw new BadRequestException( error.detail );
     
     this.logger.error(error)
-    // console.log(error)
     throw new InternalServerErrorException('Please check server logs');
 
   }
@@ -212,7 +186,6 @@ export class AuthService {
       throw new BadRequestException(error.detail);
     
     this.logger.error(error)
-    // console.log(error)
     throw new InternalServerErrorException('Unexpected error, check server logs');
 
   }

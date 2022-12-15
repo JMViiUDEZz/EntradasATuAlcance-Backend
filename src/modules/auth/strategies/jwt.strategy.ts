@@ -23,7 +23,6 @@ export class JwtStrategy extends PassportStrategy( Strategy ) {
         });
     }
 
-
     async validate( payload: JwtPayload ): Promise<User> {
         
         const { userid } = payload;
@@ -36,7 +35,6 @@ export class JwtStrategy extends PassportStrategy( Strategy ) {
         if ( !user.isActive ) 
             throw new UnauthorizedException('User is inactive, talk with an admin');
         
-
         return user;
     }
 

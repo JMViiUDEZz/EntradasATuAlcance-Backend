@@ -13,7 +13,6 @@ export class Sale {
         () => Listing,
         (Listing) => Listing.sale,
         { cascade: true, eager: true  }
-        // { cascade: true, eager: true  }
     )
     list?: Listing[];
 
@@ -21,7 +20,6 @@ export class Sale {
         () => User,
         (User) => User.sale,
         { cascade: true, eager: true  }
-        // { cascade: true, eager: true  }
     )
     seller: User;
   
@@ -29,7 +27,6 @@ export class Sale {
         () => User,
         (User) => User.sale,
         { cascade: true, eager: true  }
-        // { cascade: true, eager: true  }
     )
     buyer: User;
      
@@ -37,7 +34,6 @@ export class Sale {
         () => Event,
         (Event) => Event.sale,
         { cascade: true, eager: true  }
-        // { cascade: true, eager: true  }
     )
     @JoinTable()
     event?: Event[];
@@ -46,21 +42,20 @@ export class Sale {
         () => Date,
         (Date) => Date.sale,
         { cascade: true, eager: true  }
-        // { cascade: true, eager: true  }
     )
     date: Date;
     
-    @Column('integer',{ //int
+    @Column('integer',{
         default: 0
     })
     qtysold: number;   
 
-    @Column('integer',{ //int
+    @Column('integer',{
         default: 0
     })
     pricepaid: number;   
 
-    @Column('integer',{ //int
+    @Column('integer',{
         default: 0
     })
     commission: number;   

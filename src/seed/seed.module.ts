@@ -5,7 +5,6 @@ import { DatesModule } from './../modules/dates/dates.module';
 import { EventsModule } from './../modules/events/events.module';
 import { ListingsModule } from './../modules/listings/listings.module';
 import { SalesModule } from './../modules/sales/sales.module';
-// import { UsersModule } from './../modules/users/users.module';
 import { VenuesModule } from './../modules/venues/venues.module';
 import { AuthModule } from './../modules/auth/auth.module';
 
@@ -21,7 +20,6 @@ import { SeedController } from './seed.controller';
     EventsModule,
     ListingsModule,
     SalesModule,
-    // UsersModule,
     AuthModule,
     VenuesModule
   ]

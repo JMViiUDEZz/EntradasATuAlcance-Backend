@@ -4,7 +4,6 @@ import { DatesService } from './../modules/dates/dates.service';
 import { EventsService } from './../modules/events/events.service';
 import { ListingsService } from './../modules/listings/listings.service';
 import { SalesService } from './../modules/sales/sales.service';
-// import { UsersService } from './../modules/users/users.service';
 import { AuthService } from './../modules/auth/auth.service';
 import { VenuesService } from './../modules/venues/venues.service';
 import { categoriesData } from './data/seed-data-categories';
@@ -25,7 +24,6 @@ export class SeedService {
     private readonly eventsService: EventsService,
     private readonly listingsService: ListingsService,
     private readonly salesService: SalesService,
-    // private readonly usersService: UsersService,
     private readonly authService: AuthService,
     private readonly venuesService: VenuesService,
   ) {}
@@ -50,23 +48,21 @@ export class SeedService {
     await this.listingsService.deleteAllListings();
     await this.eventsService.deleteAllEvents();
     await this.authService.deleteAllUsers();
-    await this.categoriesService.deleteAllCategories(); //elimina toda la data de la BDD
+    await this.categoriesService.deleteAllCategories();
     await this.venuesService.deleteAllVenues();
     await this.datesService.deleteAllDates();
     };
 
   private async insertNewCategories() {
-    const categories = categoriesData.categories; //tomamos toda la data en products
+    const categories = categoriesData.categories; 
 
     const insertPromises = [];
 
-    categories.forEach( category => { //con cada uno de estos productos
-      insertPromises.push( this.categoriesService.create( category ) ); //espera a que cada una de estas promesas se resuelvan
+    categories.forEach( category => {
+      insertPromises.push( this.categoriesService.create( category ) );
     });
 
-    //Promise.all espera a que TODAS las promesas del array insertPromises se resuelvan y continúa con la siguiente línea
-    await Promise.all( insertPromises ); //ejecuta el array con cada uno de los valores que cada una de estas promesas resuelva
-    //obtenemos el resultado de cada promesa --> const resuslts = await Promise.all (insertPromises);
+    await Promise.all( insertPromises );
 
     return true;
   }

@@ -24,7 +24,6 @@ export class Category {
         () => Event,
         (Event) => Event.cat,
         {  onDelete: 'CASCADE' }
-        // { cascade: false, eager: false  }
     )
     event: Event[];
 }

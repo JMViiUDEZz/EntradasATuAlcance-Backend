@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MaxLength, MinLength, Length, IsDate, IsNumber, IsDecimal } from "class-validator";
+import { IsNotEmpty, IsString, IsNumber } from "class-validator";
 
 export class CreateListingDto {
     @IsString()
@@ -11,26 +11,18 @@ export class CreateListingDto {
     date: string;
 
     @IsNumber()
-    @IsNotEmpty()
-    // @MinLength(1)    
-    // @MaxLength(2)    
+    @IsNotEmpty()   
     numtickets: number;
 
-    @IsNumber() //@IsDecimal()
+    @IsNumber()
     @IsNotEmpty()
-    // @MinLength(1)    
-    // @MaxLength(6) 
     priceperticket: number;
 
-    @IsNumber() //@IsDecimal()
+    @IsNumber()
     @IsNotEmpty()
-    // @MinLength(1)    
-    // @MaxLength(8) 
     totalprice: number;
 
-    @IsString()
-    // @IsNotEmpty()
-    // @Length(10)  
+    @IsString() 
     listtime: string;
 
  }

@@ -4,7 +4,6 @@ import { SalesController } from './sales.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Sale } from './entities/sale.entity';
 import { ListingsModule } from '../listings/listings.module';
-// import { UsersModule } from '../users/users.module';
 import { AuthModule } from '../auth/auth.module';
 import { EventsModule } from '../events/events.module';
 import { DatesModule } from '../dates/dates.module';
@@ -17,7 +16,6 @@ import { Event } from '../events/entities/event.entity';
   providers: [SalesService],
   imports: [
     ListingsModule,
-    // UsersModule,
     AuthModule,
     EventsModule,
     DatesModule,

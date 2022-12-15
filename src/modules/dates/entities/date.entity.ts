@@ -40,7 +40,6 @@ export class Date {
         () => Sale,
         (Sale) => Sale.date,
         {  onDelete: 'CASCADE' }
-        // { cascade: false, eager: false  }
     )
     sale: Sale[];
 
@@ -48,7 +47,6 @@ export class Date {
         () => Listing,
         (Listing) => Listing.date,
         {  onDelete: 'CASCADE' }
-        // { cascade: false, eager: false  }
     )
     list: Listing[];
 
@@ -56,7 +54,6 @@ export class Date {
         () => Event,
         (Event) => Event.date,
         {  onDelete: 'CASCADE' }
-        // { cascade: false, eager: false  }
     )
     event: Event[];
 }
