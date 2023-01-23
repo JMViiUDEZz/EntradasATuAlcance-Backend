@@ -24,7 +24,6 @@ export class CreateDateDto {
     year: number;
 
     @IsBoolean()
-    @IsUppercase()
     @IsOptional()
     holiday?: boolean;
  }
