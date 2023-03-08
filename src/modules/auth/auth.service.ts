@@ -42,7 +42,7 @@ export class AuthService {
 
       return {
         ...user,
-        token: this.getJwtToken({ userid: user.userid })
+        token: this.getJwtToken({ email: user.email })
       };
 
     } catch (error) {
@@ -137,7 +137,7 @@ export class AuthService {
 
     const user = await this.userRepository.findOne({
       where: { email },
-      select: { email: true, password: true, userid: true } //! OJO!
+      select: { email: true, password: true, fullname: true } //! OJO!
     });
 
     if ( !user ) 
@@ -148,7 +148,7 @@ export class AuthService {
 
     return {
       ...user,
-      token: this.getJwtToken({ userid: user.userid })
+      token: this.getJwtToken({ email: user.email })
     };
   }
 
@@ -156,7 +156,7 @@ export class AuthService {
 
     return {
       ...user,
-      token: this.getJwtToken({ userid: user.userid })
+      token: this.getJwtToken({ email: user.email })
     };
 
   }
