@@ -5,24 +5,34 @@ import { Listing } from '../../listings/entities/listing.entity';
 @Entity({ name: 'users' })
 export class User { 
     @PrimaryGeneratedColumn('uuid') 
-    userid?: string;
+    userid: string;
   
-    @Column('text')
+    @Column('text',{
+        default:[null]
+    })
     username?: string;
   
-    @Column('text')
+    @Column('text',{
+        default:[null]
+    })    
     firstname?: string;
     
-    @Column('text')
+    @Column('text',{
+        default:[null]
+    })    
     lastname?: string;
 
     @Column('text')
     fullname:string;
 
-    @Column('text')
+    @Column('text',{
+        default:[null]
+    })    
     city?: string;
 
-    @Column('text')
+    @Column('text',{
+        default:[null]
+    })    
     state?: string;
 
     @Column('text', {
@@ -35,48 +45,70 @@ export class User {
     })
     password: string;
 
-    @Column('text')
+    @Column('text',{
+        default:[null]
+    })    
     phone?: string;
 
     @Column('bool', {
         default: true
     })
-    isActive?: boolean;
+    isActive: boolean;
 
     @Column('text', {
         array: true,
         default: ['user']
     })
-    roles?: string[];
+    roles: string[];
 
-    @Column('boolean')
+    @Column('boolean',{
+        default:false
+    })
     likesports?: boolean;
 
-    @Column('boolean')
+    @Column('boolean',{
+        default:false
+    })
     liketheatre?: boolean;
      
-    @Column('boolean')
+    @Column('boolean',{
+        default:false
+    })
     likeconcerts?: boolean;
 
-    @Column('boolean')
+    @Column('boolean',{
+        default:false
+    })
     likejazz?: boolean;
 
-    @Column('boolean')
+    @Column('boolean',{
+        default:false
+    })
     likeclassical?: boolean;
 
-    @Column('boolean')
+    @Column('boolean',{
+        default:false
+    })
     likeopera?: boolean;
 
-    @Column('boolean')
+    @Column('boolean',{
+        default:false
+    })
     likerock?: boolean;
     
-    @Column('boolean')
+    @Column('boolean',{
+        default:false
+    })
     likevegas?: boolean;
 
-    @Column('boolean')
+    @Column('boolean',{
+        default:false
+    })
     likebroadway?: boolean;
 
-    @Column('boolean')
+    @Column('boolean',{
+        default:false
+    })
     likemusicals?: boolean;
 
     @OneToMany(
