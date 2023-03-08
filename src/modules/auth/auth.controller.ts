@@ -10,12 +10,12 @@ import { PaginationDto } from 'src/common/dtos/pagination.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
+  @Post('register')
   create(@Body() createUserDto: CreateUserDto) {
     return this.authService.create(createUserDto);
   }
 
-  @Post()
+  @Post('login')
   login(@Body() loginUserDto: LoginUserDto ) {
     return this.authService.login( loginUserDto );
   }

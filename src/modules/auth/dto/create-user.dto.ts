@@ -1,25 +1,30 @@
-import { IsString, MaxLength, MinLength, Length, IsBoolean, IsEmail, Matches } from "class-validator";
+import { IsString, MaxLength, MinLength, Length, IsBoolean, IsEmail, Matches, IsOptional } from 'class-validator';
 
 
 export class CreateUserDto {
+    @IsOptional()
     @IsString()
-    username: string;
+    username?: string;
   
+    @IsOptional()
     @IsString()
-    firstname: string;
+    firstname?: string;
   
+    @IsOptional()
     @IsString()
-    lastname: string;
+    lastname?: string;
 
     @IsString()
     @MinLength(1)
     fullname: string;
 
+    @IsOptional()
     @IsString()
-    city: string;
+    city?: string;
 
+    @IsOptional()
     @IsString()
-    state: string;
+    state?: string;
 
     @IsString()
     @IsEmail()
@@ -34,36 +39,47 @@ export class CreateUserDto {
     })
     password: string;
 
+    @IsOptional()
     @IsString()
-    phone: string;
+    phone?: string;
 
+    @IsOptional()
     @IsBoolean()
-    likesports: boolean;
+    likesports?: boolean;
   
+    @IsOptional()
     @IsBoolean()
-    liketheatre: boolean;
+    liketheatre?: boolean;
   
+    @IsOptional()
     @IsBoolean() 
-    likeconcerts: boolean;
+    likeconcerts?: boolean;
 
+    @IsOptional()
     @IsBoolean()
-    likejazz: boolean;
+    likejazz?: boolean;
 
+    @IsOptional()
     @IsBoolean()
-    likeclassical: boolean;
+    likeclassical?: boolean;
 
+    @IsOptional()
     @IsBoolean()
-    likeopera: boolean;
+    likeopera?: boolean;
 
+    @IsOptional()
     @IsBoolean()
-    likerock: boolean;
+    likerock?: boolean;
     
+    @IsOptional()
     @IsBoolean()
-    likevegas: boolean;
+    likevegas?: boolean;
 
+    @IsOptional()
     @IsBoolean()
-    likebroadway: boolean;
+    likebroadway?: boolean;
 
+    @IsOptional()
     @IsBoolean()
-    likemusicals: boolean;
+    likemusicals?: boolean;
  }

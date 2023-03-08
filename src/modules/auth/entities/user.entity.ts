@@ -5,25 +5,25 @@ import { Listing } from '../../listings/entities/listing.entity';
 @Entity({ name: 'users' })
 export class User { 
     @PrimaryGeneratedColumn('uuid') 
-    userid: string;
+    userid?: string;
   
     @Column('text')
-    username: string;
+    username?: string;
   
     @Column('text')
-    firstname: string;
+    firstname?: string;
     
     @Column('text')
-    lastname: string;
+    lastname?: string;
 
     @Column('text')
     fullname:string;
 
     @Column('text')
-    city: string;
+    city?: string;
 
     @Column('text')
-    state: string;
+    state?: string;
 
     @Column('text', {
         unique: true
@@ -36,48 +36,48 @@ export class User {
     password: string;
 
     @Column('text')
-    phone: string;
+    phone?: string;
 
     @Column('bool', {
         default: true
     })
-    isActive: boolean;
+    isActive?: boolean;
 
     @Column('text', {
         array: true,
         default: ['user']
     })
-    roles: string[];
+    roles?: string[];
 
     @Column('boolean')
-    likesports: boolean;
+    likesports?: boolean;
 
     @Column('boolean')
-    liketheatre: boolean;
+    liketheatre?: boolean;
      
     @Column('boolean')
-    likeconcerts: boolean;
+    likeconcerts?: boolean;
 
     @Column('boolean')
-    likejazz: boolean;
+    likejazz?: boolean;
 
     @Column('boolean')
-    likeclassical: boolean;
+    likeclassical?: boolean;
 
     @Column('boolean')
-    likeopera: boolean;
+    likeopera?: boolean;
 
     @Column('boolean')
-    likerock: boolean;
+    likerock?: boolean;
     
     @Column('boolean')
-    likevegas: boolean;
+    likevegas?: boolean;
 
     @Column('boolean')
-    likebroadway: boolean;
+    likebroadway?: boolean;
 
     @Column('boolean')
-    likemusicals: boolean;
+    likemusicals?: boolean;
 
     @OneToMany(
         () => Sale,
@@ -89,12 +89,12 @@ export class User {
         (Sale) => Sale.buyer,
         {  onDelete: 'CASCADE' }
     )
-    sale: Sale[];
+    sale?: Sale[];
 
     @OneToMany(
         () => Listing,
         (Listing) => Listing.seller,
         {  onDelete: 'CASCADE' }
     )
-    list: Listing[];
+    list?: Listing[];
 }
