@@ -41,7 +41,7 @@ export class AuthService {
       delete user.password;
 
       return {
-        user,
+        user: { ...user },
         token: this.getJwtToken({ email: user.email })
       };
 
@@ -147,7 +147,7 @@ export class AuthService {
       throw new UnauthorizedException('Credentials are not valid (password)');
 
     return {
-      ...user,
+      user: { ...user }, 
       token: this.getJwtToken({ email: user.email })
     };
   }
@@ -165,7 +165,6 @@ export class AuthService {
   private getJwtToken( payload: JwtPayload ) {
 
     const token = this.jwtService.sign( payload );
-    console.log('token:',token)
     return token;
 
   }
