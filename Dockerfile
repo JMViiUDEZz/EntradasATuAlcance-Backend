@@ -1,21 +1,54 @@
-FROM node:14-alpine
+FROM node:16 AS install
+LABEL stage=install
 
-WORKDIR /usr/src/app
+ARG REPO_GITHUB
+ARG NN_PORT
+ARG URL_GITHUB
+ARG DB_HOST
+ARG DB_NAME
+ARG DB_USERNAME
+ARG DB_PASSWORD
+ARG DB_PORT
+ARG PORT
+ARG HOST_API
+ARG JWT_SECRET
 
-COPY package*.json ./
-RUN npm install
+ENV NN_PORT=${NN_PORT}
+ENV REPO_GITHUB=${REPO_GITHUB}
+ENV URL_GITHUB=${URL_GITHUB}
+ENV DB_HOST=${DB_HOST}
+ENV DB_NAME=${DB_NAME}
+ENV DB_USERNAME=${DB_USERNAME}
+ENV DB_PASSWORD=${DB_PASSWORD}
+ENV DB_PORT=${DB_PORT}
+ENV PORT=${PORT}
+ENV HOST_API=${HOST_API}
+ENV JWT_SECRET=${JWT_SECRET}
 
-COPY . .
+WORKDIR /src/install
+COPY ./api/package.json .
+COPY ./api/yarn.lock .
 
-EXPOSE 3000
+RUN yarn config set network-timeout 60000
+RUN yarn install
 
-CMD ["npm", "run", "start:prod"]
+FROM node:16 AS compile
+LABEL stage=compile
 
-# Base image
-FROM nginx:1.21-alpine
+WORKDIR /src/build
+COPY --from=install /src/install .
+COPY ./api/ .
 
-# Copy default config
-COPY default.conf /etc/nginx/conf.d/default.conf
+RUN yarn build
+RUN yarn config set network-timeout 60000
+RUN yarn install --production=true
 
-# Expose port 80
-EXPOSE 80
+FROM nginx:1.19.0-alpine AS deploy
+
+COPY --from=compile /src/build/dist/main.js /usr/share/nginx/html/index.js
+COPY --from=compile /src/build/node_modules /usr/share/nginx/html/node_modules
+
+EXPOSE 81
+# EXPOSE $NN_PORT
+
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
