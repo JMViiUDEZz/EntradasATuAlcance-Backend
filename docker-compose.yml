@@ -75,6 +75,8 @@ services:
     #   - app:/usr/src/app
     ports:
       - "3000:3000"
+    depends_on:
+      - dbPostgres
   nginx:
     build:
       context: .
@@ -83,6 +85,8 @@ services:
     #   - app:/usr/src/app
     ports:
       - "81:80"
+    depends_on:
+      - dbPostgres
 
 # volumes:
 #   app:
