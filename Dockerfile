@@ -1,20 +1,23 @@
-# Imagen base
-FROM node:18-alpine
+# Imagen base de Node
+FROM node:14-alpine
 
-# Crea la carpeta de la aplicación
+# Directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Copia el package.json y el package-lock.json a la imagen
+# Copiar archivo package.json y package-lock.json
 COPY package*.json ./
 
-# Instala las dependencias
-RUN npm install --only=production
+# Instalar dependencias de la aplicación
+RUN npm install
 
-# Copia los archivos de la aplicación a la imagen
-COPY ./dist ./dist
+# Copiar la aplicación al contenedor
+COPY . .
 
-# Exponer el puerto que usará la aplicación
+# Construir la aplicación
+RUN npm run build
+
+# Exponer el puerto 3000
 EXPOSE 3000
 
 # Comando para iniciar la aplicación
-CMD [ "node", "dist/main" ]
+CMD ["npm", "run", "start:prod"]
