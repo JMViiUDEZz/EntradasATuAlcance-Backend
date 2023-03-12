@@ -3,4 +3,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-CMD ["npm", "run", "start:prod"]
+RUN npm run build
+CMD ["node", "dist/main"]
+# CMD ["npm", "run", "start:dev"]
