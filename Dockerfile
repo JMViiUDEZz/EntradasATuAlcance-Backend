@@ -1,9 +1,20 @@
+# Imagen base
 FROM node:18-alpine
-WORKDIR /usr/src/app
+
+# Crea la carpeta de la aplicación
+WORKDIR /app
+
+# Copia el package.json y el package-lock.json a la imagen
 COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 5000
-RUN npm run build
-CMD ["node", "index.js"]
-# CMD ["npm", "run", "start:dev"]
+
+# Instala las dependencias
+RUN npm install --only=production
+
+# Copia los archivos de la aplicación a la imagen
+COPY ./dist ./dist
+
+# Exponer el puerto que usará la aplicación
+EXPOSE 3000
+
+# Comando para iniciar la aplicación
+CMD [ "node", "dist/main" ]
