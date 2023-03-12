@@ -1,92 +1,39 @@
-# version: "3"
-# services:
-#   dbPostgres:
-#       image: postgres:14.3
-#       restart: always
-#       ports:
-#         - "${DB_PORT}:5432"
-#       environment:
-#         POSTGRES_USER: ${DB_USERNAME}
-#         POSTGRES_PASSWORD: ${DB_PASSWORD}
-#         POSTGRES_DB: ${DB_NAME}
-#       container_name: dbPostgres
-#       # volumes:
-#       #   - ./postgresEntradasATuAlcanceNest:/var/lib/postgresql/data
-#       # networks: 
-#       #     net_postgres-nest:
-#       #         ipv4_address: 172.180.10.3
-#   Backend:
-#     container_name: Backend
-#     image: Backend
-#     build: 
-#       context: .
-#       dockerfile: ./Dockerfile
-#       args: 
-#       #  - USUARIO=${USUARIO}
-#       #  - TZ=${TZ}
-#       #  - PASSWD=${PASSWD}
-#        - B_PORT=${B_PORT}
-#       #  - REPO_GITHUB=${REPO_GITHUB}
-#       #  - URL_GITHUB=${URL_GITHUB}
-#        - DB_HOST=${DB_HOST}
-#        - DB_NAME=${DB_NAME}
-#        - DB_USERNAME=${DB_USERNAME}
-#        - DB_PASSWORD=${DB_PASSWORD}
-#        - DB_PORT=${DB_PORT}
-#        - PORT=${PORT}
-#        - HOST_API=${HOST_API}
-#        - JWT_SECRET=${JWT_SECRET}
-#     env_file: 
-#       - ./.env
-#     ports: 
-#       - ${B_PORT}:3000
-#     # volumes:
-#     #   - ./nestEntradasATuAlcanceNest:/var/www/html
-#     # networks: 
-#     #   net_postgres-nest:
-#     #       ipv4_address: 172.180.10.4
-#     depends_on:
-#       - dbPostgres
-# # networks: 
-# #   net_postgres-nest:
-# #       ipam: 
-# #           driver: default
-# #           config: 
-# #               - subnet: 172.180.10.0/24
-
-version: '3'
-
+version: '3.8'
 services:
-  dbPostgres:
-      image: postgres:14.3
-      restart: always
-      ports:
-        - "5434:5432"
-      environment:
-        POSTGRES_USER: jose
-        POSTGRES_PASSWORD: pswEntradasATuAlcance
-        POSTGRES_DB: EntradasATuAlcance
-      container_name: dbPostgres
-  node:
-    build:
-      context: .
-      dockerfile: Dockerfile-nginx
-    # volumes:
-    #   - app:/usr/src/app
+  api:
+    container_name: api
+    build: .
+    restart: always
     ports:
-      - "3000:3000"
+      - 3000:3000
+    # environment:
+    #   NODE_ENV: production
+    #   POSTGRES_HOST: db
+    #   POSTGRES_PORT: 5432
+    #   POSTGRES_USER: postgres
+    #   POSTGRES_PASSWORD: postgres
+    #   POSTGRES_DB: db
     depends_on:
-      - dbPostgres
+      - db
+  db:
+    container_name: db
+    image: postgres:14.3
+    restart: always
+    environment:
+      POSTGRES_USER: jose
+      POSTGRES_PASSWORD: pswEntradasATuAlcance
+      POSTGRES_DB: EntradasATuAlcance
+    ports:
+      - 5432:5432
   nginx:
-    build:
-      context: .
-      dockerfile: Dockerfile-nginx
-    # volumes:
-    #   - app:/usr/src/app
+    container_name: nginx
+    image: nginx:latest
+    restart: always
     ports:
-      - "81:80"
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
     depends_on:
-      - dbPostgres
-
-# volumes:
-#   app:
+      - api
