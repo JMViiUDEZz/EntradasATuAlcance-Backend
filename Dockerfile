@@ -20,8 +20,8 @@ ENV NODE_ENV=production
 EXPOSE 3000
 
 # Start the Node.js server
-# CMD ["npm", "start"]
-RUN npm start
+CMD ["npm", "start"]
+# RUN npm start
 
 # Iniciar NGINX en primer plano
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
