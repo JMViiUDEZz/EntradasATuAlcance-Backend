@@ -37,8 +37,8 @@ export class Event {
     @Column('text')
     starttime: string;
 
-    @Column('text', {nullable: true} )
-    imagen: string;
+    @Column('text')
+    image: string;
     
     @ManyToMany(
         () => Sale,
