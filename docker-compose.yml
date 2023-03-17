@@ -23,7 +23,7 @@ services:
     ports:
       - 5432:5432
   nginx:
-    image: nginx:latest
+    image: nginx:alpine
     ports:
       - 80:80
     depends_on:

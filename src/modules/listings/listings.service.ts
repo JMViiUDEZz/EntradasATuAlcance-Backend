@@ -51,9 +51,9 @@ export class ListingsService {
     })
     return listings.map( ( listing ) => ({
       ...listing,
-      seller: listing.seller.userid,
-      event: listing.event.eventid,
-      date: listing.date.dateid,
+      // seller: listing.seller.userid,
+      // event: listing.event.eventid,
+      // date: listing.date.dateid,
     }))
   }
 

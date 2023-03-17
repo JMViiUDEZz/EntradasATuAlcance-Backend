@@ -36,6 +36,9 @@ export class Event {
 
     @Column('text')
     starttime: string;
+
+    @Column('text', {nullable: true} )
+    imagen: string;
     
     @ManyToMany(
         () => Sale,

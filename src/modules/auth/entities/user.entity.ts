@@ -3,7 +3,10 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Listing } from '../../listings/entities/listing.entity';
 
 @Entity({ name: 'users' })
-export class User { 
+export class User {
+    map(arg0: (img: any) => any): any {
+      throw new Error('Method not implemented.');
+    } 
     @PrimaryGeneratedColumn('uuid') 
     userid: string;
   
