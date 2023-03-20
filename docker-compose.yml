@@ -3,18 +3,18 @@ services:
   env_file:
    - ./.env
   environment:
-  - BACKEND_NODE_PORT=${BACKEND_NODE_PORT}        
-  - BACKEND_NGINX_PORT=${BACKEND_NGINX_PORT}
-  - BACKEND_POSTGRES_PORT=${BACKEND_POSTGRES_PORT}    
-  - DB_HOST=${DB_HOST}  
-  - DB_NAME=${DB_NAME}  
-  - DB_USERNAME=${DB_USERNAME}  
-  - DB_PASSWORD=${DB_PASSWORD}  
-  - DB_PORT=${DB_PORT}  
-  - PORT=${PORT}  
-  - HOST_API=${HOST_API}  
-  - JWT_SECRET=${JWT_SECRET} 
-  - NODE_ENV=${NODE_ENV} 
+  - BACKEND_NODE_PORT: ${BACKEND_NODE_PORT}        
+  - BACKEND_NGINX_PORT: ${BACKEND_NGINX_PORT}
+  - BACKEND_POSTGRES_PORT: ${BACKEND_POSTGRES_PORT}    
+  - DB_HOST: ${DB_HOST}  
+  - DB_NAME: ${DB_NAME}  
+  - DB_USERNAME: ${DB_USERNAME}  
+  - DB_PASSWORD: ${DB_PASSWORD}  
+  - DB_PORT: ${DB_PORT}  
+  - PORT: ${PORT}  
+  - HOST_API: ${HOST_API}  
+  - JWT_SECRET: ${JWT_SECRET} 
+  - NODE_ENV: ${NODE_ENV} 
   api:
     build: .
     environment:
