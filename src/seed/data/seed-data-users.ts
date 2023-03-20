@@ -19,6 +19,7 @@ interface SeedUser {
     likevegas: boolean;
     likebroadway: boolean;
     likemusicals: boolean;
+    role?: string;
 }
 
 interface SeedData {
@@ -37,7 +38,7 @@ export const usersData: SeedData = {
             city: "Kent",
             state: "WA",
             email: "Etiam.laoreet.libero@sodalesMaurisblandit.edu",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(664) 602-4412",
             likesports: true,
             liketheatre: true,
@@ -49,6 +50,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "admin"
         },
         {
             userid: "f563c544-7baf-11ed-a1eb-0242ac120002",
@@ -59,7 +61,7 @@ export const usersData: SeedData = {
             city: "Murfreesboro",
             state: "SK",
             email: "Suspendisse.tristique@nonnisiAenean.edu",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(783) 492-1886",
             likesports: true,
             liketheatre: true,
@@ -71,6 +73,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "admin"
         },
         {
             userid: "f563c6fc-7baf-11ed-a1eb-0242ac120002",
@@ -81,7 +84,7 @@ export const usersData: SeedData = {
             city: "High Point",
             state: "ME",
             email: "amet.faucibus.ut@condimentumegetvolutpat.ca",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(624) 767-2465",
             likesports: true,
             liketheatre: true,
@@ -93,6 +96,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "user"
         },
         {
             userid: "f563c832-7baf-11ed-a1eb-0242ac120002",
@@ -103,7 +107,7 @@ export const usersData: SeedData = {
             city: "Omaha",
             state: "AB",
             email: "sed@lacusUtnec.ca",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(355) 452-8168",
             likesports: true,
             liketheatre: true,
@@ -115,6 +119,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "user"
         },
         {
             userid: "f563c99a-7baf-11ed-a1eb-0242ac120002",
@@ -125,7 +130,7 @@ export const usersData: SeedData = {
             city: "Forest Lake",
             state: "NS",
             email: "Cum@accumsan.com",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(476) 519-9131",
             likesports: true,
             liketheatre: true,
@@ -137,6 +142,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "user"
         },
         {
             userid: "f563cad0-7baf-11ed-a1eb-0242ac120002",
@@ -147,7 +153,7 @@ export const usersData: SeedData = {
             city: "Naperville",
             state: "GA",
             email: "turpis@accumsanlaoreet.org",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(818) 765-4255",
             likesports: true,
             liketheatre: true,
@@ -159,6 +165,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "user"
         },
         {
             userid: "f563cc42-7baf-11ed-a1eb-0242ac120002",
@@ -169,7 +176,7 @@ export const usersData: SeedData = {
             city: "Moultrie",
             state: "WV",
             email: "elementum@semperpretiumneque.ca",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(297) 875-7247",
             likesports: true,
             liketheatre: true,
@@ -181,6 +188,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "user"
         },
         {
             userid: "f563cdd2-7baf-11ed-a1eb-0242ac120002",
@@ -191,7 +199,7 @@ export const usersData: SeedData = {
             city: "Guayama",
             state: "AK",
             email: "ullamcorper.nisl@Cras.edu",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(998) 934-9210",
             likesports: true,
             liketheatre: true,
@@ -203,6 +211,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "user"
         },
         {
             userid: "f563d304-7baf-11ed-a1eb-0242ac120002",
@@ -213,7 +222,7 @@ export const usersData: SeedData = {
             city: "Port Orford",
             state: "MD",
             email: "Integer.mollis.Integer@tristiquealiquet.org",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(725) 719-7670",
             likesports: true,
             liketheatre: true,
@@ -225,6 +234,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "user"
         },
         {
             userid: "f563d444-7baf-11ed-a1eb-0242ac120002",
@@ -235,7 +245,7 @@ export const usersData: SeedData = {
             city: "Waterbury",
             state: "MB",
             email: "Donec.fringilla@sodalesat.org",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(197) 726-8249",
             likesports: true,
             liketheatre: true,
@@ -247,6 +257,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "user"
         },
         {
             userid: "f563d552-7baf-11ed-a1eb-0242ac120002",
@@ -257,7 +268,7 @@ export const usersData: SeedData = {
             city: "Rawlins",
             state: "MT",
             email: "arcu.Curabitur@senectusetnetus.com",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(419) 147-8207",
             likesports: true,
             liketheatre: true,
@@ -269,6 +280,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "user"
         },
         {
             userid: "f563d660-7baf-11ed-a1eb-0242ac120002",
@@ -279,7 +291,7 @@ export const usersData: SeedData = {
             city: "Kona",
             state: "OH",
             email: "ac@velit.ca",
-            password: "1234",
+            password: "1q2w3E4R",
             phone: "(617) 527-9908",
             likesports: true,
             liketheatre: true,
@@ -291,6 +303,7 @@ export const usersData: SeedData = {
             likevegas: true,
             likebroadway: true,
             likemusicals: true,
+            role: "user"
         },
     ]
 }
