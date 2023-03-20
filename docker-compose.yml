@@ -2,7 +2,7 @@ version: '3.8'
 services:
   env_file:
    - ./.env
-  args:
+  environment:
   - BACKEND_NODE_PORT=${BACKEND_NODE_PORT}        
   - BACKEND_NGINX_PORT=${BACKEND_NGINX_PORT}
   - BACKEND_POSTGRES_PORT=${BACKEND_POSTGRES_PORT}    
